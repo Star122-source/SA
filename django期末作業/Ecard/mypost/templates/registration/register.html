@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% if messages %}
+        <div class="alert alert-danger">
+            <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+    <div class="container">
+        <!-- 左側選單 -->
+        <div class="sidebar">
+            <div class="category">
+                <h2>學校</h2>
+                <div class="links">
+                    <a href="/school/ntub">北商</a>
+                    <a href="/school/ntut">北科</a>
+                    <a href="/school/tcut">台科</a>
+                </div>
+            </div>
+
+            <div class="category">
+                <h2>生活</h2>
+                <div class="links">
+                    <a href="/life/mood">心情</a>
+                    <a href="/life/work">工作</a>
+                </div>
+            </div>
+
+            <br><a href="/my">個人檔案</a>
+        </div>
+
+        <!-- 右側註冊內容 -->
+        <div class="main-content">
+            <h1>註冊</h1>
+            <form method="post" enctype="multipart/form-data" action="{% url 'register' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="username">用戶名:</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">電子郵件:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password1">密碼:</label>
+                    <input type="password" id="password1" name="password1" required>
+                </div>
+                <div class="form-group">
+                    <label for="password2">確認密碼:</label>
+                    <input type="password" id="password2" name="password2" required>
+                </div>
+                <div class="form-group">
+                    <label for="avatar">頭像:</label>
+                    <input type="file" id="avatar" name="avatar" accept="image/*" required>
+                </div>
+                <button type="submit">註冊</button>
+            </form>
+            <div class="links">
+                <p>已經有帳號了？ <a href="{% url 'login' %}">登入</a></p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_styles %}
+    <style>
+        body {
+            background-color: #e0f7fa; 
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            display: flex;
+            margin: 20px;
+        }
+
+        /* 左側選單樣式 */
+        .sidebar {
+            width: 250px;  
+            background-color: #ffffff;
+            padding: 20px;
+            border: 1px solid #bbdefb;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-right: 20px;
+        }
+
+        /* 右側內容區塊 */
+        .main-content {
+            flex-grow: 1;  
+            background-color: #ffffff;
+            padding: 20px;
+            border: 1px solid #bbdefb;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #1976d2;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #1565c0;
+        }
+
+        .links {
+            margin-top: 20px;
+        }
+
+        .links a {
+            color: #1565c0; 
+            text-decoration: none;
+        }
+
+        .links a:hover {
+            color: #0d47a1; 
+        }
+    </style>
+{% endblock %}

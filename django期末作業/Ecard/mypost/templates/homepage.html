@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block title %}
+論壇
+{% endblock %}
+
+{% block headmsg %}
+    <h1>論壇</h1>
+{% endblock %}
+{% load static %}
+{% block content %}
+    <div class="category">
+        <h2>學校</h2>
+        <div class="links">
+            <a href="/school/ntub">北商</a>
+            <a href="/school/ntut">北科</a>
+            <a href="/school/tcut">台科</a>
+        </div>
+    </div>
+
+    <div class="category">
+        <h2>生活</h2>
+        <div class="links">
+            <a href="/life/mood">心情</a>
+            <a href="/life/work">工作</a>
+        </div>
+    </div>
+
+    {% if user.avatar %}
+        <img src="{{ user.avatar.url }}" alt="用戶頭像" class="user-avatar" />
+    {% else %}
+        <img src="{% static 'default_avatar.png' %}" alt="預設頭像" class="user-avatar" />
+    {% endif %}
+
+    <br><a href="{% url 'profile' %}">個人檔案</a>
+    <!-- 新增貼文按鈕 -->
+    <div class="add-post">
+        <a href="{% url 'add_post' %}" class="btn btn-primary">新增貼文</a>
+    </div>
+{% endblock %}
+
+{% block extra_styles %}
+    <style>
+        body {
+            background-color: #e0f7fa; 
+            font-family: Arial, sans-serif;
+        }
+        
+        .container {
+            display: flex;
+            margin: 20px;
+        }
+        .user-avatar {
+            width: 120px !important;
+            height: 100px !important;
+            border-radius: 50% !important;
+            object-fit: cover !important;
+        }
+        .profile-picture {
+            width: 50px; /* 調整大小 */
+            height: 50px; /* 調整大小 */
+            border-radius: 50%; /* 圓形 */
+            margin-right: 10px; /* 右邊距 */
+        }
+
+        .category {
+            background-color: #ffffff; 
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #bbdefb; 
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+        }
+        .category h2 {
+            color: #1976d2;
+        }
+        .links {
+            margin-top: 10px;
+        }
+        .links a {
+            display: block;
+            color: #333;
+            text-decoration: none;
+            padding: 5px 0;
+            color: #1565c0; 
+        }
+
+        .links a:hover {
+            color: #0d47a1; 
+            background-color: #e3f2fd; 
+            border-radius: 3px;
+            padding-left: 5px;
+        }
+    </style>
+{% endblock %}

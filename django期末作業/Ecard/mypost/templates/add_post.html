@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container">
+        <!-- 左側選單 -->
+        <div class="sidebar">
+            <div class="category">
+                <h2>學校</h2>
+                <div class="links">
+                    <a href="/school/ntub">北商</a>
+                    <a href="/school/ntut">北科</a>
+                    <a href="/school/tcut">台科</a>
+                </div>
+            </div>
+
+            <div class="category">
+                <h2>生活</h2>
+                <div class="links">
+                    <a href="/life/mood">心情</a>
+                    <a href="/life/work">工作</a>
+                </div>
+            </div>
+
+            <br><a href="/my">個人檔案</a>
+        </div>
+
+        <!-- 右側新增貼文內容 -->
+        <div class="main-content">
+            <h1>新增貼文</h1>
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="id_title">標題：</label>
+                    {{ form.title }}
+                </div>
+                <div class="form-group">
+                    <label for="id_category">分類：</label>
+                    {{ form.category }}
+                </div>
+                <div class="form-group">
+                    <label for="id_subcategory">子分類：</label>
+                    {{ form.subcategory }}
+                </div>
+                <div class="form-group">
+                    <label for="id_body">內容：</label>
+                    {{ form.body }}
+                </div>
+                <button type="submit" class="btn btn-primary">發布</button>
+                <a href="{% url 'homepage' %}" class="btn btn-secondary">取消</a>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_styles %}
+    <style>
+        body {
+            background-color: #e0f7fa; 
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            display: flex;
+            margin: 20px;
+        }
+
+        /* 左側選單樣式 */
+        .sidebar {
+            width: 250px;  
+            background-color: #ffffff;
+            padding: 20px;
+            border: 1px solid #bbdefb;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-right: 20px;
+        }
+
+        /* 右側內容區塊 */
+        .main-content {
+            flex-grow: 1;  
+            background-color: #ffffff;
+            padding: 20px;
+            border: 1px solid #bbdefb;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .btn {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background-color: #1976d2;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #1565c0;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+    </style>
+{% endblock %}

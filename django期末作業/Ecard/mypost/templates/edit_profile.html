@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container">
+        <!-- 左側選單 -->
+        <div class="sidebar">
+            <div class="category">
+                <h2>學校</h2>
+                <div class="links">
+                    <a href="/school/ntub">北商</a>
+                    <a href="/school/ntut">北科</a>
+                    <a href="/school/tcut">台科</a>
+                </div>
+            </div>
+
+            <div class="category">
+                <h2>生活</h2>
+                <div class="links">
+                    <a href="/life/mood">心情</a>
+                    <a href="/life/work">工作</a>
+                </div>
+            </div>
+
+            <br><a href="/my">個人檔案</a>
+        </div>
+
+        <!-- 右側內容區塊 -->
+        <div class="main-content">
+            <h1>修改個人資訊</h1>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="id_nickname">暱稱：</label>
+                    {{ form.nickname }}
+                </div>
+                <div class="form-group">
+                    <label for="id_avatar">頭像：</label>
+                    {{ form.avatar }}
+                </div>
+                <div class="form-group">
+                    <label for="id_bio">簡介：</label>
+                    {{ form.bio }}
+                </div>
+                <button type="submit" class="btn btn-primary">保存</button>
+                <a href="{% url 'profile' %}" class="btn btn-secondary">取消</a>
+            </form>
+            <h1>
+    
+            </h1>
+            <!-- 回到主頁的按鈕 -->
+            <div class="back-to-home">
+                <form method="get" action="{% url 'homepage' %}">  <!-- 使用 GET 方法 -->
+                    <button type="submit" class="logout-button">回到主頁</button>  <!-- 使用與登出按鈕相同的類名 -->
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_styles %}
+    <style>
+        body {
+            background-color: #e0f7fa; 
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            display: flex;
+            margin: 20px;
+        }
+        .user-avatar {
+        width: 100px; /* 調整頭像寬度 */
+        height: 100px; /* 調整頭像高度 */
+        border-radius: 50%; /* 使頭像圓形 */
+        object-fit: cover; /* 確保頭像不變形 */
+        }
+
+        /* 左側選單樣式 */
+        .sidebar {
+            width: 250px;  /* 設定左側選單的寬度 */
+            background-color: #ffffff;
+            padding: 20px;
+            border: 1px solid #bbdefb;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-right: 20px;
+        }
+
+        /* 右側內容區塊 */
+        .main-content {
+            flex-grow: 1;  /* 右側內容區塊自動佔滿剩餘空間 */
+            background-color: #ffffff;
+            padding: 20px;
+            border: 1px solid #bbdefb;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px; /* 增加底部間距 */
+        }
+
+        .profile-picture {
+            width: 50px; /* 調整大小 */
+            height: 50px; /* 調整大小 */
+            border-radius: 50%; /* 圓形 */
+            margin-right: 10px; /* 右邊距 */
+        }
+
+        .logout-section {
+            margin-top: 20px;
+        }
+
+        .logout-button {
+            background-color: #1976d2;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .logout-button:hover {
+            background-color: #1565c0;
+        }
+
+        .login-section {
+            margin-top: 20px;
+        }
+
+        .login-section a {
+            color: #1976d2;
+            text-decoration: none;
+        }
+
+        .login-section a:hover {
+            text-decoration: underline;
+        }
+    </style>
+{% endblock %}
